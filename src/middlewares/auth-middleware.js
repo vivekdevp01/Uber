@@ -21,7 +21,7 @@ function isLoggedIn(req, res, next) {
     );
   }
 
-  req.user = { email: decodedToken.email, _id: decodedToken.id };
+  req.user = { email: decodedToken.email, id: decodedToken.id };
   console.log(req.user);
   next();
 }

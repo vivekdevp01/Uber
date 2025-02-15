@@ -1,13 +1,19 @@
 const express = require("express");
 
 const { PassengerController } = require("../../controllers");
-const { AuthMiddleware } = require("../../middlewares");
+const { AuthMiddleware, UserMiddleware } = require("../../middlewares");
 const router = express.Router();
 
 router.get(
   "/",
   AuthMiddleware.isLoggedIn,
   PassengerController.getPassengerBookings
+);
+router.post(
+  "/feedback",
+  AuthMiddleware.isLoggedIn,
+  UserMiddleware.validateUser(["bookingId", "rating", "feedback"]),
+  PassengerController.provideFeedback
 );
 // router.post(
 //   "/signin",

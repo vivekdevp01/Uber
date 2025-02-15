@@ -49,7 +49,7 @@ class BookingRepository extends CrudRepository {
   }
   async findBooking(criteria) {
     try {
-      return Booking.findOne(criteria);
+      return await Booking.findOne(criteria);
     } catch (error) {
       console.log(error);
       throw error;
