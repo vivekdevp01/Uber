@@ -16,7 +16,7 @@ async function signUp(data) {
       });
     }
     const user = await userRepository.create(data);
-    const token = Auth.generateToken({ email: user.data, id: user.id });
+    const token = Auth.generateToken({ email: user.email, id: user._id });
     console.log(token);
     return { user, token };
   } catch (error) {
@@ -50,7 +50,7 @@ async function signIn(data) {
         `the password you entered for ${data.email} is incorrect. Please try again..`
       );
     }
-    const token = Auth.generateToken({ email: user.data, id: user.id });
+    const token = Auth.generateToken({ email: user.email, id: user._id });
     console.log(token);
     return { user, token };
   } catch (error) {

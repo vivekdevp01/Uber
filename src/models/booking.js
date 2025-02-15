@@ -19,6 +19,14 @@ const bookingSchema = new mongoose.Schema({
       required: true,
     },
   },
+  destination: {
+    latitude: {
+      type: Number,
+    },
+    longitude: {
+      type: Number,
+    },
+  },
   fare: {
     type: Number,
   },

@@ -13,6 +13,7 @@ function isLoggedIn(req, res, next) {
   let decodedToken;
   try {
     decodedToken = Auth.verifyToken(token);
+    console.log("Logged-in User ID:", decodedToken.id);
   } catch (error) {
     throw new UnauthorizedRequest(
       "Invalid credentials.",
@@ -20,8 +21,8 @@ function isLoggedIn(req, res, next) {
     );
   }
 
-  req.user = { email: decodedToken.email, id: decodedToken._id };
-
+  req.user = { email: decodedToken.email, _id: decodedToken.id };
+  console.log(req.user);
   next();
 }
 
