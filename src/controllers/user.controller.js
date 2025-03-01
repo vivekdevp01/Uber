@@ -29,6 +29,8 @@ async function signIn(req, res, next) {
     res.cookie("token", user.token, {
       httpOnly: true,
       maxAge: 6 * 24 * 60 * 60 * 1000,
+      secure: true, // Change to `true` if using HTTPS
+      sameSite: "none", // Prevents CSRF issues
     });
     return res.status(StatusCodes.OK).json({
       success: true,

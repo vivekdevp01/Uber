@@ -30,17 +30,18 @@ class BookingRepository extends CrudRepository {
   }
   async updateBookingStatus(bookingId, driverId, status) {
     try {
-      const booking = await Booking.findByIdAndUpdate(
+      const booking = await Booking.findOneAndUpdate(
         {
           _id: bookingId,
           status: "pending",
         },
-        { driverId: driverId, status },
-        { new: true }
+        { driver: driverId, status },
+        { new: true, runValidators: true }
       );
       if (!booking) {
         throw new NotFound("Booking not found", bookingId);
       }
+      console.log("Booking updated", booking);
       return booking;
     } catch (error) {
       console.log(error);

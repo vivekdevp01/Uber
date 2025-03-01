@@ -3,6 +3,8 @@ const Auth = require("../utils/common/Auth");
 
 function isLoggedIn(req, res, next) {
   console.log(req.cookies);
+  console.log("Incoming Cookies:", req.cookies); // 👀 Debugging
+  console.log("Incoming Headers:", req.headers);
   if (!req.cookies || !req.cookies.token) {
     throw new UnauthorizedRequest(
       "Invalid credentials.",
