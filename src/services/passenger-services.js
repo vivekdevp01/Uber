@@ -25,11 +25,17 @@ async function provideRating(passengerId, bookingId, rating, feedback) {
     const booking = await bookingRepository.findBooking({
       _id: bookingId,
       passenger: passengerId,
+      status: "confirmed",
     });
-    // console.log(booking);
+
     if (!booking) {
       throw new NotFound(
-        "Booking not found for the given passenger and booking id"
+        "Booking not found or is not confirmed for the given passenger and booking ID"
+      );
+    }
+    if (booking.rating || booking.feedback) {
+      throw new ConflictError(
+        "Rating and feedback already provided for the booking."
       );
     }
     booking.rating = rating;
